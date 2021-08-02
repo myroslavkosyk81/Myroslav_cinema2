@@ -1,0 +1,1 @@
+*{margin:0px}p{width:200px;background-color:red}.seats{display:flex;flex-wrap:wrap}.seat{border-sizing:border-box;width:100%;max-width:33%;height:40px;line-height:40px;border:2px solid #bb5959;margin:1%;background:#D3D3D3}.seat.is-selected{background:#FA8072}
