@@ -6,21 +6,32 @@ module.exports = {
     next();
   },
 
-  seatsPage: function (req, res) {
+  seatsPage: function (req, res, next) {
     var seatDB = new Seat(req.body)
     seatDB.save()
       .then(function (result) {
-        res.json(result)
+        next();
       })
       .catch(err => {
-        return res.end()
+        return res.status(420).json(err)
+        // return res.end()
       })
+    next();
       // .catch(err => {
       //   return res.status(420).json(err)
       // })
-    
+
     // res.json(record);
-    res.render('main', { title: 'Cinema'});
+    // res.render('main', { title: 'Cinema'});
+  },
+  renderPage: function (req, res) {
+    const numberOfTickets = 1
+    var data = req.body
+    Seat.find({}, null, {limit: numberOfTickets, sort: {createdAt: 'desc'}}, function(err, records) {
+
+       res.render('1', { data: data })
+
+    });
   },
   // seatsPage: function (req, res, next) {
   //   var seatDB = new Seat(req.body)
