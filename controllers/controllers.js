@@ -6,23 +6,16 @@ module.exports = {
     next();
   },
 
-  seatsPage: function (req, res, next) {
+  seatsPage: function (req, res) {
     var seatDB = new Seat(req.body)
     seatDB.save()
       .then(function (result) {
-        next();
+        res.json(result)
       })
       .catch(err => {
         return res.status(420).json(err)
         // return res.end()
       })
-    next();
-      // .catch(err => {
-      //   return res.status(420).json(err)
-      // })
-
-    // res.json(record);
-    // res.render('main', { title: 'Cinema'});
   },
   renderPage: function (req, res) {
     const numberOfTickets = 1
@@ -30,7 +23,6 @@ module.exports = {
     Seat.find({}, null, {limit: numberOfTickets, sort: {createdAt: 'desc'}}, function(err, records) {
 
        res.render('1', { data: data })
-
     });
   },
   // seatsPage: function (req, res, next) {
@@ -59,5 +51,4 @@ module.exports = {
       return res.json(err)
     })
   }
-
 }
